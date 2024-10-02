@@ -72,9 +72,6 @@ include_once('includes/header.php');
                 </a>
             </div>
         </div>
-<<<<<<< HEAD
-=======
-
         <!-- Medicines -->
         <div class="col-lg-3 col-md-6">
             <div class="panel panel-danger">
@@ -140,8 +137,6 @@ include_once('includes/header.php');
                 </a>
             </div>
         </div>
-
->>>>>>> 08ef31f (list appointments added)
     </div>
 
     <div class="row">
