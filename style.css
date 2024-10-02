@@ -1,0 +1,49 @@
+    /* Apply the background image to the body of the login page */
+    body.login-page {
+        background: url('docotrbg2.jpg') no-repeat center center fixed;
+        background-size: cover;
+        height: 100vh;
+    }
+
+    /* Style the login form container */
+    #page- {
+        background-color: rgba(255, 255, 255, 0.8); /* White background with transparency */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+        margin-top: 100px; /* Push the form down the page */
+    }
+
+    /* Center the form horizontally */
+    .loginform {
+        margin: 0 auto;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    
+    h1 {
+        text-align: center;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+    
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    
+    th, td {
+        padding: 12px;
+        text-align: center;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+    }
+    

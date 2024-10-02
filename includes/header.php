@@ -26,23 +26,23 @@
 </head>
 
 <body>
-    <div id="wrapper">
+    <div id="wrapper" class="bg-image">
         <!-- Navigation -->
         <?php if (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true): ?>
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-    <!-- Admin Logo and Brand -->
-    <a class="navbar-brand" href="">
-        <img src="d6.jpg" alt="Admin Logo" style="display: inline-block; height: 30px; margin-right: 10px;">
-        Admin
-    </a>
-</div>
+                <div class="navbar-header ">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Admin Logo and Brand -->
+                    <a class="navbar-brand" href="">
+                        <img src="d6.jpg" alt="Admin Logo" style="display: inline-block; height: 30px; margin-right: 10px;">
+                        Admin
+                    </a>
+                </div>
 
                 <!-- /.navbar-header -->
                 <ul class="nav navbar-top-links navbar-right">
@@ -75,7 +75,7 @@
 
                             <!-- Customers Section -->
                             <li <?php echo (CURRENT_PAGE == "customers.php" || CURRENT_PAGE == "add_customer.php") ? 'class="active"' : ''; ?>>
-                                <a href="#"><i class="fa fa-user-circle fa-fw"></i> Customers<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-user-circle fa-fw"></i> Users<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="customers.php"><i class="fa fa-list fa-fw"></i> List all</a>
@@ -104,10 +104,22 @@
                             <li>
                                 <a href="add_medicine.php"><i class="fa fa-pills fa-fw"></i> Add Medicine</a>
                             </li>
+<<<<<<< HEAD
+=======
+
+                            <li>
+                                <a href="list_appointments.php"><i class="fa fa-pills fa-fw"></i>List Appointment</a>
+                            </li>
+
+
+>>>>>>> 08ef31f (list appointments added)
                         </ul>
                     </div>
                 </div>
                 <!-- /.navbar-static-side -->
             </nav>
         <?php endif; ?>
-        <!-- The End of the Header -->
+    </div>
+
+    <!-- The End of the Header -->
+</body>

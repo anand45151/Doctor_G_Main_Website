@@ -11,7 +11,7 @@ $select = array('id', 'f_name', 'l_name', 'gender', 'phone', 'created_at', 'upda
 $chunk_size = 100;
 $offset = 0;
 
-$data = $db->withTotalCount()->get('customers');
+$data = $db->withTotalCount()->get('patients');
 $total_count = $db->totalCount;
 
 $handle = fopen('php://memory', 'w');

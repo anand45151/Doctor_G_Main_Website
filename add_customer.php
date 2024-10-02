@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $data_to_store['created_at'] = date('Y-m-d H:i:s');
     $db = getDbInstance();
     
-    $last_id = $db->insert('customers', $data_to_store);
+    $last_id = $db->insert('patients', $data_to_store);
 
     if($last_id)
     {
@@ -37,7 +37,7 @@ require_once 'includes/header.php';
 <div id="page-wrapper">
 <div class="row">
      <div class="col-lg-12">
-            <h2 class="page-header">Add Users</h2>
+            <h2 class="page-header">Add patients</h2>
         </div>
         
 </div>
