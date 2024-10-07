@@ -4,8 +4,7 @@ require_once './config/config.php';
 require_once './includes/auth_validate.php';
 
 // Serve POST method. After successful insert, redirect to doctors.php page.
-if ($_SERVER['REQUEST_METHOD'] === 'POST') 
-{
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Mass Insert Data. Keep "name" attribute in HTML form the same as column name in MySQL table.
     $data_to_store = array_filter($_POST);
 
@@ -24,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     }
 
     $db = getDbInstance();
-    
+
     // Insert data into the doctors table
     $last_id = $db->insert('doctors', $data_to_store);
 
@@ -38,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     }
 }
 
-require_once 'includes/header.php'; 
+require_once 'includes/header.php';
 ?>
 <div id="page-wrapper">
     <div class="row">
@@ -52,21 +51,21 @@ require_once 'includes/header.php';
 </div>
 
 <script type="text/javascript">
-$(document).ready(function(){
-   $("#doctor_form").validate({
-       rules: {
-            Doctor_Name: {
-                required: true,
-                minlength: 3
-            },
-            Doctor_Specialty: {
-                required: true,
-                minlength: 3
-            },
-            // Add validation for Doctor_Photo if necessary
-        }
+    $(document).ready(function () {
+        $("#doctor_form").validate({
+            rules: {
+                Doctor_Name: {
+                    required: true,
+                    minlength: 3
+                },
+                Doctor_Specialty: {
+                    required: true,
+                    minlength: 3
+                },
+                // Add validation for Doctor_Photo if necessary
+            }
+        });
     });
-});
 </script>
 
 <?php include_once 'includes/footer.php'; ?>

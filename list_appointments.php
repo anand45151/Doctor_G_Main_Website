@@ -53,14 +53,8 @@ include BASE_PATH . '/includes/header.php';
 <!-- Main container -->
 <div id="page-wrapper">
     <div class="row">
-        <div class="col-lg-6">
-            <h1 class="page-header">Appointments</h1>
-        </div>
-        <div class="col-lg-6">
-            <div class="page-action-links text-right">
-                <a href="add_appointment.php?operation=create" class="btn btn-success"><i
-                        class="glyphicon glyphicon-plus"></i> Add new</a>
-            </div>
+        <div class="bg-warning">
+            <h1 class="page-header text-center">Appointments</h1>
         </div>
     </div>
     <?php include BASE_PATH . '/includes/flash_messages.php'; ?>

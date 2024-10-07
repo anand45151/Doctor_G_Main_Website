@@ -19,7 +19,7 @@ include_once('includes/header.php');
         </div>
     </div>
 
-
+    <!-- cards -->
     <div class="row">
         <!-- Patients -->
         <div class="col-lg-3 col-md-6">
@@ -128,7 +128,7 @@ include_once('includes/header.php');
                         </div>
                     </div>
                 </div>
-                <a href="doctors.php">
+                <a href="list_appointments.php">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -139,6 +139,19 @@ include_once('includes/header.php');
         </div>
     </div>
 
+
+    <hr>
+    <!-- graphs -->
+    <div>
+        <div class="row">
+            <div class="col-lg-8">
+                <canvas id="dashboardChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="row">
         <div class="col-lg-8">
             <canvas id="doctorsChart" width="400" height="200"></canvas>
@@ -146,21 +159,29 @@ include_once('includes/header.php');
     </div>
 </div>
 
+
 <!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    var ctx = document.getElementById('doctorsChart').getContext('2d');
-    var doctorsChart = new Chart(ctx, {
+    var ctx = document.getElementById('dashboardChart').getContext('2d');
+    var dashboardChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Doctors'],
+            labels: ['Doctors', 'Patients', 'Medicines', 'Appointments'],
             datasets: [{
-                label: '# of Doctors',
-                data: [<?php echo $numDoctors; ?>],
+                label: 'Count',
+                data: [<?php echo $numDoctors; ?>, <?php echo $numCustomers; ?>, <?php echo $numMedicines; ?>, <?php echo $numAppointments; ?>],
                 backgroundColor: [
-                    'rgba(75, 192, 192, 0.2)'
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
                 ],
                 borderColor: [
-                    'rgba(75, 192, 192, 1)'
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
                 ],
                 borderWidth: 1
             }]

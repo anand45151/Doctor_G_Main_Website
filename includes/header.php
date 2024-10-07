@@ -30,7 +30,7 @@
         <!-- Navigation -->
         <?php if (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true): ?>
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header ">
+                <div class="navbar-header height">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -39,8 +39,17 @@
                     </button>
                     <!-- Admin Logo and Brand -->
                     <a class="navbar-brand" href="">
-                        <img src="d6.jpg" alt="Admin Logo" style="display: inline-block; height: 30px; margin-right: 10px;">
-                        Admin
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                        </svg>
+                        <span class="m-5">
+                            <strong>
+                                Admin
+                            </strong>
+                        </span>
                     </a>
                 </div>
 
@@ -75,13 +84,14 @@
 
                             <!-- Customers Section -->
                             <li <?php echo (CURRENT_PAGE == "customers.php" || CURRENT_PAGE == "add_customer.php") ? 'class="active"' : ''; ?>>
-                                <a href="#"><i class="fa fa-user-circle fa-fw"></i> Users<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-user-circle fa-fw"></i> Patients<span
+                                        class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="customers.php"><i class="fa fa-list fa-fw"></i> List all</a>
+                                        <a href="customers.php"><i class="fa fa-list fa-fw"></i>List all Patients</a>
                                     </li>
                                     <li>
-                                        <a href="add_customer.php"><i class="fa fa-plus fa-fw"></i> Add New</a>
+                                        <a href="add_customer.php"><i class="fa fa-plus fa-fw"></i>Add New Patient</a>
                                     </li>
                                 </ul>
                             </li>
@@ -99,20 +109,28 @@
                             </li>
 
                             <li>
-                                <a href="add_medical_store.php"><i class="fa fa-building fa-fw"></i> Add Medical Store</a>
+                                <a href="add_medical_store.php">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-capsule" viewBox="0 0 16 16">
+                                        <path
+                                            d="M1.828 8.9 8.9 1.827a4 4 0 1 1 5.657 5.657l-7.07 7.071A4 4 0 1 1 1.827 8.9Zm9.128.771 2.893-2.893a3 3 0 1 0-4.243-4.242L6.713 5.429z" />
+                                    </svg>
+                                    <span>Add Medical Store</span>
+                                </a>
                             </li>
                             <li>
-                                <a href="add_medicine.php"><i class="fa fa-pills fa-fw"></i> Add Medicine</a>
+                                <a href="list_appointments.php">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-calendar3" viewBox="0 0 16 16">
+                                        <path
+                                            d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z" />
+                                        <path
+                                            d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                                    </svg>
+                                    <span> List Appointment</span>
+                                </a>
                             </li>
-<<<<<<< HEAD
-=======
 
-                            <li>
-                                <a href="list_appointments.php"><i class="fa fa-pills fa-fw"></i>List Appointment</a>
-                            </li>
-
-
->>>>>>> 08ef31f (list appointments added)
                         </ul>
                     </div>
                 </div>

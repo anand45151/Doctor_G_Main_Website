@@ -56,7 +56,7 @@ include BASE_PATH . '/includes/header.php';
 ?>
 <!-- Main container -->
 <div id="page-wrapper">
-    <div class="row">
+    <div class="row bg-primary">
         <div class="col-lg-6">
             <h1 class="page-header">Doctors</h1>
         </div>
