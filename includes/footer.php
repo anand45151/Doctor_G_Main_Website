@@ -57,7 +57,7 @@
 
         <div style="margin:30px;" class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
             <div style="margin-top:20px;">
-                <p>© 2022 Company, Inc. All rights reserved.</p>
+                <p>© 2024 DoctorG, Inc. All rights reserved.</p>
             </div>
             <ul class="list-unstyled d-flex">
                 <li class="ms-3"><a href="#"><svg class="bi" width="24" height="24">

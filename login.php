@@ -82,4 +82,4 @@ include BASE_PATH . '/includes/header.php';
 		</div>
 	</form>
 </div>
-<?php include BASE_PATH . '/includes/footer.php'; ?>
+<!-- <?php include BASE_PATH . '/includes/footer.php'; ?> -->

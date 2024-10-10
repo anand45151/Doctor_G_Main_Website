@@ -88,7 +88,7 @@
                                         class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="customers.php"><i class="fa fa-list fa-fw"></i>List all Patients</a>
+                                        <a href="patients.php"><i class="fa fa-list fa-fw"></i>List all Patients</a>
                                     </li>
                                     <li>
                                         <a href="add_customer.php"><i class="fa fa-plus fa-fw"></i>Add New Patient</a>

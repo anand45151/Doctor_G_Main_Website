@@ -4,8 +4,8 @@ require_once 'config/config.php';
 require_once BASE_PATH . '/includes/auth_validate.php';
 
 // Costumers class
-require_once BASE_PATH . '/lib/Costumers/Costumers.php';
-$costumers = new Costumers();
+require_once BASE_PATH . '/lib/Costumers/Patients.php';
+$patients = new Patients();
 
 // Get Input data from query string
 $search_string = filter_input(INPUT_GET, 'search_string');
@@ -62,7 +62,8 @@ include BASE_PATH . '/includes/header.php';
         </div>
         <div class="col-lg-6">
             <div class="page-action-links text-right">
-                <a href="add_doctor.php?operation=create" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Add new</a>
+                <a href="add_doctor.php?operation=create" class="btn btn-success"><i
+                        class="glyphicon glyphicon-plus"></i> Add new</a>
             </div>
         </div>
     </div>
@@ -72,11 +73,12 @@ include BASE_PATH . '/includes/header.php';
     <div class="well text-center filter-form">
         <form class="form form-inline" action="">
             <label for="input_search">Search</label>
-            <input type="text" class="form-control" id="input_search" name="search_string" value="<?php echo xss_clean($search_string); ?>">
+            <input type="text" class="form-control" id="input_search" name="search_string"
+                value="<?php echo xss_clean($search_string); ?>">
             <label for="input_order">Order By</label>
             <select name="filter_col" class="form-control">
                 <?php
-                foreach ($costumers->setOrderingValues() as $opt_value => $opt_name):
+                foreach ($patients->setOrderingValues() as $opt_value => $opt_name):
                     $selected = ($order_by === $opt_value) ? 'selected' : '';
                     echo '<option value="' . $opt_value . '" ' . $selected . '>' . $opt_name . '</option>';
                 endforeach;
@@ -93,7 +95,8 @@ include BASE_PATH . '/includes/header.php';
     <!-- //Filters -->
 
     <div id="export-section">
-        <a href="export_doctors.php"><button class="btn btn-sm btn-primary">Export to CSV <i class="glyphicon glyphicon-export"></i></button></a>
+        <a href="export_doctors.php"><button class="btn btn-sm btn-primary">Export to CSV <i
+                    class="glyphicon glyphicon-export"></i></button></a>
     </div>
 
     <!-- Table -->
@@ -115,7 +118,8 @@ include BASE_PATH . '/includes/header.php';
                     <td><?php echo xss_clean($row['Doctor_id']); ?></td>
                     <td>
                         <?php if (!empty($row['Doctor_Photo'])): ?>
-                            <img src="uploads/<?php echo htmlspecialchars($row['Doctor_Photo']); ?>" alt="Doctor Photo" style="width: 100px; height: auto;">
+                            <img src="uploads/<?php echo htmlspecialchars($row['Doctor_Photo']); ?>" alt="Doctor Photo"
+                                style="width: 100px; height: auto;">
                         <?php else: ?>
                             No Photo
                         <?php endif; ?>
@@ -125,8 +129,11 @@ include BASE_PATH . '/includes/header.php';
                     <td><?php echo xss_clean($row['Doctor_Location']); ?></td>
                     <td><?php echo xss_clean($row['Doctor_Experiences']); ?></td>
                     <td>
-                        <a href="edit_doctor.php?doctor_id=<?php echo $row['Doctor_id']; ?>&operation=edit" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
-                        <a href="#" class="btn btn-danger delete_btn" data-toggle="modal" data-target="#confirm-delete-<?php echo $row['Doctor_id']; ?>"><i class="glyphicon glyphicon-trash"></i></a>
+                        <a href="edit_doctor.php?doctor_id=<?php echo $row['Doctor_id']; ?>&operation=edit"
+                            class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="#" class="btn btn-danger delete_btn" data-toggle="modal"
+                            data-target="#confirm-delete-<?php echo $row['Doctor_id']; ?>"><i
+                                class="glyphicon glyphicon-trash"></i></a>
                     </td>
                 </tr>
                 <!-- Delete Confirmation Modal -->

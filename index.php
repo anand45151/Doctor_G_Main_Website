@@ -7,8 +7,9 @@ require_once 'includes/auth_validate.php';
 $db = getDbInstance();
 
 // Get Dashboard information
-$numCustomers = $db->getValue("patients", "count(*)");
+$numPatients = $db->getValue("patients", "count(*)");
 $numDoctors = $db->getValue("doctors", "count(*)");
+$numAppointments = $db->getValue("appointments", "count(*)");
 
 include_once('includes/header.php');
 ?>
@@ -30,7 +31,7 @@ include_once('includes/header.php');
                             <i class="fa fa-user fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $numCustomers; ?></div>
+                            <div class="huge"><?php echo $numPatients; ?></div>
                             <div>
                                 <h3>Patients</h3>
                             </div>
@@ -121,7 +122,7 @@ include_once('includes/header.php');
                             <!-- logo of Appointment end-->
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $numDoctors; ?></div>
+                            <div class="huge"><?php echo $numAppointments; ?></div>
                             <div>
                                 <h3>Appointments</h3>
                             </div>
@@ -141,59 +142,46 @@ include_once('includes/header.php');
 
 
     <hr>
+
+
     <!-- graphs -->
-    <div>
-        <div class="row">
-            <div class="col-lg-8">
-                <canvas id="dashboardChart" width="400" height="200"></canvas>
-            </div>
-        </div>
-    </div>
-
-
-
+    <h1>Graphical Representation</h1>
     <div class="row">
         <div class="col-lg-8">
-            <canvas id="doctorsChart" width="400" height="200"></canvas>
+            <div id="chartContainer" style="height: 740px; width: 100%;"></div>
         </div>
     </div>
 </div>
 
+<style>
+    #chartContainer {
+        margin-left: 150px;
+    }
+</style>
 
 <!-- Include Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script>
-    var ctx = document.getElementById('dashboardChart').getContext('2d');
-    var dashboardChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Doctors', 'Patients', 'Medicines', 'Appointments'],
-            datasets: [{
-                label: 'Count',
-                data: [<?php echo $numDoctors; ?>, <?php echo $numCustomers; ?>, <?php echo $numMedicines; ?>, <?php echo $numAppointments; ?>],
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 99, 132, 1)',
-                ],
-                borderWidth: 1
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title: {
+                text: "All Users Data"
+            },
+            data: [{
+                type: "pie",
+                startAngle: 240,
+                yValueFormatString: "##0.00\"%\"",
+                indexLabel: "{label} {y}",
+                dataPoints: [
+                    { y: <?php echo $numDoctors; ?>, label: "Doctors" },
+                    { y: <?php echo $numPatients; ?>, label: "Patients" },
+                    { y: <?php echo $numAppointments; ?>, label: "Appointments" }
+                ]
             }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+        });
+        chart.render();
+    }
 </script>
 
 <?php include_once('includes/footer.php'); ?>

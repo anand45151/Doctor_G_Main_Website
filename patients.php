@@ -4,8 +4,8 @@ require_once 'config/config.php';
 require_once BASE_PATH . '/includes/auth_validate.php';
 
 // Costumers class
-require_once BASE_PATH . '/lib/Costumers/Costumers.php';
-$costumers = new Costumers();
+require_once BASE_PATH . '/lib/Costumers/patients.php';
+$patients = new Patients();
 
 // Get Input data from query string
 $search_string = filter_input(INPUT_GET, 'search_string');
@@ -31,7 +31,7 @@ if (!$order_by) {
 
 //Get DB instance. i.e instance of MYSQLiDB Library
 $db = getDbInstance();
-$select = array('id', 'f_name', 'l_name', 'gender', 'phone', 'created_at', 'updated_at');
+$select = array('id', 'f_name', 'l_name', 'gender', 'address', 'city', 'state', 'email', 'phone', 'date_of_birth', 'created_at', 'updated_at');
 
 //Start building query according to input parameters.
 // If search string
@@ -49,7 +49,7 @@ if ($order_by) {
 $db->pageLimit = $pagelimit;
 
 // Get result of the query.
-$rows = $db->arraybuilder()->paginate('customers', $page, $select);
+$rows = $db->arraybuilder()->paginate('patients', $page, $select);
 $total_pages = $db->totalPages;
 
 include BASE_PATH . '/includes/header.php';
@@ -62,7 +62,8 @@ include BASE_PATH . '/includes/header.php';
         </div>
         <div class="col-lg-6">
             <div class="page-action-links text-right">
-                <a href="add_customer.php?operation=create" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Add new</a>
+                <a href="add_customer.php?operation=create" class="btn btn-success"><i
+                        class="glyphicon glyphicon-plus"></i> Add new</a>
             </div>
         </div>
     </div>
@@ -72,26 +73,28 @@ include BASE_PATH . '/includes/header.php';
     <div class="well text-center filter-form">
         <form class="form form-inline" action="">
             <label for="input_search">Search</label>
-            <input type="text" class="form-control" id="input_search" name="search_string" value="<?php echo xss_clean($search_string); ?>">
+            <input type="text" class="form-control" id="input_search" name="search_string"
+                value="<?php echo xss_clean($search_string); ?>">
             <label for="input_order">Order By</label>
             <select name="filter_col" class="form-control">
                 <?php
-                foreach ($costumers->setOrderingValues() as $opt_value => $opt_name): ($order_by === $opt_value) ? $selected = 'selected' : $selected = '';
+                foreach ($patients->setOrderingValues() as $opt_value => $opt_name):
+                    ($order_by === $opt_value) ? $selected = 'selected' : $selected = '';
                     echo ' <option value="' . $opt_value . '" ' . $selected . '>' . $opt_name . '</option>';
                 endforeach;
                 ?>
             </select>
             <select name="order_by" class="form-control" id="input_order">
                 <option value="Asc" <?php
-                                    if ($order_by == 'Asc') {
-                                        echo 'selected';
-                                    }
-                                    ?>>Asc</option>
+                if ($order_by == 'Asc') {
+                    echo 'selected';
+                }
+                ?>>Asc</option>
                 <option value="Desc" <?php
-                                        if ($order_by == 'Desc') {
-                                            echo 'selected';
-                                        }
-                                        ?>>Desc</option>
+                if ($order_by == 'Desc') {
+                    echo 'selected';
+                }
+                ?>>Desc</option>
             </select>
             <input type="submit" value="Go" class="btn btn-primary">
         </form>
@@ -101,7 +104,8 @@ include BASE_PATH . '/includes/header.php';
 
 
     <div id="export-section">
-        <a href="export_customers.php"><button class="btn btn-sm btn-primary">Export to CSV <i class="glyphicon glyphicon-export"></i></button></a>
+        <a href="export_customers.php"><button class="btn btn-sm btn-primary">Export to CSV <i
+                    class="glyphicon glyphicon-export"></i></button></a>
     </div>
 
     <!-- Table -->
@@ -109,9 +113,14 @@ include BASE_PATH . '/includes/header.php';
         <thead>
             <tr>
                 <th width="5%">ID</th>
-                <th width="45%">Name</th>
-                <th width="20%">Gender</th>
-                <th width="20%">Phone</th>
+                <th width="15%">Name</th>
+                <th width="5%">Gender</th>
+                <th width="20%">Address</th>
+                <th width="5%">city</th>
+                <th width="5%">state</th>
+                <th width="10%">Phone</th>
+                <th width="10%">email</th>
+                <th width="20%">DOB</th>
                 <th width="10%">Actions</th>
             </tr>
         </thead>
@@ -121,10 +130,18 @@ include BASE_PATH . '/includes/header.php';
                     <td><?php echo $row['id']; ?></td>
                     <td><?php echo xss_clean($row['f_name'] . ' ' . $row['l_name']); ?></td>
                     <td><?php echo xss_clean($row['gender']); ?></td>
+                    <td><?php echo xss_clean($row['address']); ?></td>
+                    <td><?php echo xss_clean($row['city']); ?></td>
+                    <td><?php echo xss_clean($row['state']); ?></td>
                     <td><?php echo xss_clean($row['phone']); ?></td>
+                    <td><?php echo xss_clean($row['email']); ?></td>
+                    <td><?php echo xss_clean($row['date_of_birth']); ?></td>
                     <td>
-                        <a href="edit_customer.php?customer_id=<?php echo $row['id']; ?>&operation=edit" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
-                        <a href="#" class="btn btn-danger delete_btn" data-toggle="modal" data-target="#confirm-delete-<?php echo $row['id']; ?>"><i class="glyphicon glyphicon-trash"></i></a>
+                        <a href="edit_customer.php?customer_id=<?php echo $row['id']; ?>&operation=edit"
+                            class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="#" class="btn btn-danger delete_btn" data-toggle="modal"
+                            data-target="#confirm-delete-<?php echo $row['id']; ?>"><i
+                                class="glyphicon glyphicon-trash"></i></a>
                     </td>
                 </tr>
                 <!-- Delete Confirmation Modal -->
@@ -157,7 +174,7 @@ include BASE_PATH . '/includes/header.php';
 
     <!-- Pagination -->
     <div class="text-center">
-        <?php echo paginationLinks($page, $total_pages, 'customers.php'); ?>
+        <?php echo paginationLinks($page, $total_pages, 'patients.php'); ?>
     </div>
     <!-- //Pagination -->
 </div>
