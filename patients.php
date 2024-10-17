@@ -137,17 +137,18 @@ include BASE_PATH . '/includes/header.php';
                     <td><?php echo xss_clean($row['email']); ?></td>
                     <td><?php echo xss_clean($row['date_of_birth']); ?></td>
                     <td>
-                        <a href="edit_customer.php?customer_id=<?php echo $row['id']; ?>&operation=edit"
-                            class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
-                        <a href="#" class="btn btn-danger delete_btn" data-toggle="modal"
-                            data-target="#confirm-delete-<?php echo $row['id']; ?>"><i
-                                class="glyphicon glyphicon-trash"></i></a>
+                        <a href="edit_patients.php?id=<?php echo $row['id']; ?>&operation=edit" class="btn btn-primary"><i
+                                class="glyphicon glyphicon-edit"></i></a>
+
+                        <a href="delete_patients.php?del_id=<?php echo $row['id']; ?>" class="btn btn-danger delete_btn"
+                            data-toggle="modal" data-target="#confirm-delete-<?php echo $row['id']; ?>">
+                            <i class="glyphicon glyphicon-trash"></i></a>
                     </td>
                 </tr>
                 <!-- Delete Confirmation Modal -->
                 <div class="modal fade" id="confirm-delete-<?php echo $row['id']; ?>" role="dialog">
                     <div class="modal-dialog">
-                        <form action="delete_customer.php" method="POST">
+                        <form action="delete_patients.php" method="POST">
                             <!-- Modal content -->
                             <div class="modal-content">
                                 <div class="modal-header">

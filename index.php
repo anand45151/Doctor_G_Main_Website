@@ -38,7 +38,7 @@ include_once('includes/header.php');
                         </div>
                     </div>
                 </div>
-                <a href="customers.php">
+                <a href="patients.php">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -145,19 +145,12 @@ include_once('includes/header.php');
 
 
     <!-- graphs -->
-    <h1>Graphical Representation</h1>
     <div class="row">
         <div class="col-lg-8">
-            <div id="chartContainer" style="height: 740px; width: 100%;"></div>
+            <div id="chartContainer" style="height: 290px; width: 100%;"></div>
         </div>
     </div>
 </div>
-
-<style>
-    #chartContainer {
-        margin-left: 150px;
-    }
-</style>
 
 <!-- Include Chart.js -->
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
@@ -171,6 +164,10 @@ include_once('includes/header.php');
             data: [{
                 type: "pie",
                 startAngle: 240,
+                toolTipContent: "<b>{label}</b>: {y}%",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabelFontSize: 16,
                 yValueFormatString: "##0.00\"%\"",
                 indexLabel: "{label} {y}",
                 dataPoints: [

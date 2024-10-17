@@ -3,41 +3,39 @@ session_start();
 require_once './config/config.php';
 require_once 'includes/auth_validate.php';
 
-
-// Sanitize if you want
+// Sanitize input
 $customer_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-$operation = filter_input(INPUT_GET, 'operation', FILTER_SANITIZE_STRING);
-($operation == 'edit') ? $edit = true : $edit = false;
+$operation = filter_input(INPUT_GET, 'operation', FILTER_SANITIZE_SPECIAL_CHARS); // Updated here
+$edit = ($operation == 'edit') ? true : false;
+
 $db = getDbInstance();
 
-//Handle update request. As the form's action attribute is set to the same script, but 'POST' method, 
+// Handle the update request
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //Get customer id form query string parameter.
-    $customer_id = filter_input(INPUT_GET, 'customer_id', FILTER_SANITIZE_STRING);
+    // Get the patient ID from the query string
+    $customer_id = filter_input(INPUT_GET, 'patient_id', FILTER_SANITIZE_SPECIAL_CHARS); // Updated here
 
-    //Get input data
-    $data_to_update = filter_input_array(INPUT_POST);
+    // Get and sanitize input data
+    $data_to_update = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS); // Updated here
 
+    // Add a timestamp
     $data_to_update['updated_at'] = date('Y-m-d H:i:s');
     $db = getDbInstance();
     $db->where('id', $customer_id);
-    $stat = $db->update('customers', $data_to_update);
+    $stat = $db->update('patients', $data_to_update);
 
     if ($stat) {
-        $_SESSION['success'] = "Customer updated successfully!";
-        //Redirect to the listing page,
-        header('location: customers.php');
-        //Important! Don't execute the rest put the exit/die. 
+        $_SESSION['success'] = "Patient updated successfully!";
+        // Redirect to the patients listing page
+        header('location: patients.php');
         exit();
     }
 }
 
-
-//If edit variable is set, we are performing the update operation.
+// Prepopulate the form for editing
 if ($edit) {
     $db->where('id', $customer_id);
-    //Get data to pre-populate the form.
-    $customer = $db->getOne("customers");
+    $customer = $db->getOne("patients");
 }
 ?>
 
@@ -58,7 +56,7 @@ include_once 'includes/header.php';
 
         <?php
         //Include the common form for add and edit  
-        require_once('./forms/customer_form.php');
+        require_once('./forms/patient_form.php');
         ?>
     </form>
 </div>
